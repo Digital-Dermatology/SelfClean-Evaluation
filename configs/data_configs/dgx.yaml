@@ -1,0 +1,24 @@
+DDI:
+    path: "data/"
+
+ham10000:
+    path: "data/"
+
+fitzpatrick17k:
+    path: "data/"
+
+ImageNet-1k:
+    path: "data/ImageNet/ILSVRC/Validation/"
+    cleanlab_annot: "assets/annotations/CleanLab/cleanlab_imagenet_label_errors.csv"
+    val_solutions: "data/ImageNet/LOC_val_solution.csv"
+    mapping_path: "data/ImageNet/LOC_synset_mapping.txt"
+    reassessed_lbl_path: "data/ImageNet/ILSVRC/real.json"
+
+FOOD_101:
+    path: "data/Food-101N_release/"
+
+CheXpert:
+    path: "data/CheXpert/"
+
+VinDr_BodyPartXR:
+    path: "data/VinDr-BodyPartXR/converted-Resized-512/"

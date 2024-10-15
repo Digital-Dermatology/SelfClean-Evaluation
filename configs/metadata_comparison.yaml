@@ -1,0 +1,2 @@
+# data paths
+dataset: !include data_configs/local.yaml

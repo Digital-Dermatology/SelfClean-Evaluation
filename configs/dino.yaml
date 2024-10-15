@@ -1,0 +1,73 @@
+batch_size: 64
+epochs: &epoch_number 500
+optim: "adamw"
+lr: 0.0005
+min_lr: 1e-6
+weight_decay: 0.04
+weight_decay_end: 0.4
+warmup_epochs: 10
+momentum_teacher: 0.996
+clip_grad: 3.0
+use_lr_scheduler: True
+use_wd_scheduler: True
+
+seed: 42
+log_level: "INFO"
+fine_tune_from: null
+
+save_every_n_epochs: *epoch_number
+embed_vis_every_n_epochs: 50
+visualize_attention: True
+imgs_to_visualize: 5
+
+# SelfClean: Normalizing
+apply_l2_norm: True
+
+model:
+    out_dim: 4096
+    emb_dim: 192 # tiny: 192, small: 384, base: 768
+    base_model: "vit_tiny"
+    model_type: "VIT"
+    use_bn_in_head: False
+    norm_last_layer: True
+    student:
+        weights: "IMAGENET1K_V1" # only used for ResNets
+        patch_size: 16
+        drop_path_rate: 0.1
+    teacher:
+        weights: "IMAGENET1K_V1" # only used for ResNets
+        patch_size: 16
+        drop_path_rate: 0.1
+    eval:
+        n_last_blocks: 1
+        avgpool_patchtokens: False
+
+dataset:
+    train_path:
+        - "data/OxfordIIITPet/"
+    val_size: 0.2
+    loader:
+        num_workers: 48
+        drop_last: False
+        pin_memory: True
+    val_loader:
+        num_workers: 24
+        drop_last: False
+        pin_memory: True
+        shuffle: False
+    augmentations:
+        global_crops_scale: (0.7, 1.)
+        local_crops_scale: (0.05, 0.4)
+        global_crops_number: 2
+        local_crops_number: 12
+        global_crops_size: 224 # Normal ViT: 224, DINOv2(14patches): 196
+        local_crops_size: 96 # Normal ViT: 96, DINOv2(14patches): 84
+        apply_random_rotation: True
+
+loss:
+    warmup_teacher_temp: 0.04
+    teacher_temp: 0.04
+    warmup_teacher_temp_epochs: 30
+
+optimizer:
+    freeze_last_layer: 1

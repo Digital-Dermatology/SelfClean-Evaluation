@@ -1,0 +1,63 @@
+# Training:
+batch_size: 64
+epochs: 500
+
+lr: 0.001 # base learning rate: absolute_lr = base_lr * total_batch_size / 256
+min_lr: 1.0e-6
+warmup_epochs: 40
+
+weight_decay: 0.05
+weight_decay_end: 0.4
+
+clip_grad: null
+use_lr_scheduler: True
+use_wd_scheduler: True
+
+optimizer: # usually AdamW for ViTs
+    name: "adamw"
+    args:
+        betas: [0.9, 0.95]
+
+loss:
+    norm_pix_loss: False # Use (per-patch) normalized pixels as targets for computing loss
+
+seed: 42
+log_level: "INFO"
+fine_tune_from: None
+
+# Visualization:
+save_every_n_epochs: 50
+embed_vis_every_n_epochs: 50
+visualize_attention: True
+imgs_to_visualize: 5
+
+# Model configurations:
+model:
+    base_model: "masked_vit_tiny"
+    model_type: "VIT"
+    emb_dim: 192 # tiny: 192, small: 384, base: 768
+    mask_ratio: 0.75
+    configs:
+        patch_size: 16
+    eval:
+        n_last_blocks: 1
+        avgpool_patchtokens: False
+
+# SelfClean configurations:
+apply_l2_norm: True
+
+# Data configurations:
+dataset:
+    train_path: "data/DDI/"
+    val_size: 1.0
+    loader:
+        num_workers: 48
+        drop_last: False
+        pin_memory: True
+    val_loader:
+        num_workers: 24
+        drop_last: False
+        pin_memory: True
+        shuffle: False
+    augmentations:
+        input_size: 224

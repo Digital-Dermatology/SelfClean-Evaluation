@@ -1,0 +1,28 @@
+seed: 42
+log_level: "INFO"
+
+# SelfClean: Force Normalization
+apply_l2_norm: True
+
+# Only used for ViTs
+n_layers: 1
+
+# data paths
+dataset_name: "DDI"
+dataset: !include data_configs/local.yaml
+
+artefact_augmentation_dataset:
+    add_watermark: True
+    add_colorbar: True
+    add_mosaic: True
+    watermark_prob: 0.5
+    colorbar_prob: 0.5
+    mosaic_prob: 0.5
+    watermark_path: "assets/logo.png"
+    watermark_text: "CONFIDENTIAL"
+    watermark_frac: 0.5
+    colorbar_path: "assets/colorbar.png"
+    mosaic_scale: 0.5
+
+pretraining_type: "DINO"
+model_config: !include dino.yaml

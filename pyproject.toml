@@ -1,0 +1,20 @@
+[project]
+name = "SelfClean"
+description = "Evaluation of SelfClean."
+version = "0.0.0"
+authors = [
+    { name = "XXX", email = "XXX@XXX.XX" },
+]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+skip_gitignore=true
+
+[tool.pytest.ini_options]
+# Set true to see logger ouput in test command line window
+log_cli = false
+log_cli_level = "INFO"
+log_cli_format = "%(name)s %(message)s"

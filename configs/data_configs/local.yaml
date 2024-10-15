@@ -1,0 +1,27 @@
+DDI:
+    path: "data/"
+
+ham10000:
+    path: "data/"
+
+fitzpatrick17k:
+    path: "data/"
+
+ImageNet-1k:
+    path: "/media/gengar/data-repository/ImageNet-1k/ILSVRC/Validation"
+    cleanlab_annot: "assets/annotations/CleanLab/cleanlab_imagenet_label_errors.csv"
+    val_solutions: "/media/gengar/data-repository/ImageNet-1k/ILSVRC/LOC_val_solution.csv"
+    mapping_path: "/media/gengar/data-repository/ImageNet-1k/ILSVRC/LOC_synset_mapping.txt"
+    reassessed_lbl_path: "/media/gengar/data-repository/ImageNet-1k/ILSVRC/real.json"
+
+FOOD_101:
+    path: "/media/gengar/data-repository/Food-101N/Food-101N_release"
+
+CheXpert:
+    path: "/media/gengar/data-repository/CheXpert-Full/"
+
+Chest_Xray_COVID:
+    path: "data/"
+
+VinDr_BodyPartXR:
+    path: "/media/gengar/data-repository/VinDr-BodyPartXR/converted-Resized-512/"

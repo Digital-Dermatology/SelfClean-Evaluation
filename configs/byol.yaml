@@ -1,0 +1,65 @@
+batch_size: 90
+epochs: &epoch_number 500
+optim: "lars"
+lr: 0.001
+min_lr: 1e-6
+weight_decay: 1e-6
+weight_decay_end: 0.4
+warmup_epochs: 10
+clip_grad: 3.0
+use_lr_scheduler: True
+use_wd_scheduler: True
+
+momentum_base: 0.996 # paper default: 0.996
+
+seed: 42
+log_level: "INFO"
+fine_tune_from: null
+
+save_every_n_epochs: *epoch_number
+embed_vis_every_n_epochs: 50
+visualize_attention: False
+imgs_to_visualize: 5
+
+# SelfClean: Normalizing
+apply_l2_norm: False
+
+model:
+    base_model: "vit_tiny"
+    model_type: "VIT"
+    emb_dim: 192 # tiny: 192, small: 384, base: 768, rn18: 512, rn50: 1024
+    out_dim: 256 # paper default: 256
+    byol:
+        projection_hidden_size: 4096
+        projection_size: 256
+    encoder:
+        # ResNet config
+        out_dim: 128
+        weights: "IMAGENET1K_V1"
+        # ViT config
+        patch_size: 16
+        drop_path_rate: 0.1
+    eval:
+        n_last_blocks: 1
+        avgpool_patchtokens: False
+
+dataset:
+    train_path: "data/DermaCompass/"
+    val_size: 0.2
+    loader:
+        num_workers: 10
+        drop_last: True
+        pin_memory: True
+    val_loader:
+        num_workers: 10
+        drop_last: False
+        pin_memory: True
+        shuffle: False
+    augmentations:
+        target_size: 224
+        gaussian_kernel: 23
+        scaling: 1
+
+loss:
+    temperature: 0.5
+    use_cosine_similarity: True

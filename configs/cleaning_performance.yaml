@@ -1,0 +1,43 @@
+# global configs for experiments
+test_size: 0.20
+log_wandb: True
+
+# data paths
+dataset: !include data_configs/local.yaml
+
+# global configs for cleaning
+q: 0.05
+alpha: 0.1
+
+# these keys define the eval types
+kNN:
+    n_repeats: 100
+    # method specific parameters
+    k: 10
+
+lin:
+    n_repeats: 100
+    # method specific parameters
+    solver: "sag"
+    tol: 0.1
+    max_iter: 100
+
+fine_tuning:
+    n_repeats: 3
+    # method specific parameters
+    learning_rate: 0.0001
+    find_optimal_lr: True
+    batch_size: 64
+    train_epochs: 100
+    warmup_epochs: 10
+    early_stopping_patience: 10
+    num_workers: 24
+    # head parameters
+    use_bn_in_head: True
+    dropout_in_head: 0.5
+
+random_forest:
+    n_repeats: 100
+
+lightgbm:
+    n_repeats: 100
